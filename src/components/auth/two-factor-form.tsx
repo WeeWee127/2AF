@@ -30,13 +30,12 @@ export const TwoFactorForm: FC = () => {
  const onSubmit = (data: TwoFactorFormData) => {
     startTransition(async () => {
       const result = await verify2FA(data); // Call the server action
-      if (result.success) {
-        toast({
-            title: "Підтвердження успішне",
-            description: "Двофакторну автентифікацію пройдено.",
-            variant: "default", // Use default theme color for success
-           });
-        router.push('/dashboard'); // Redirect to dashboard on successful verification
+      if (result?.success) {
+        router.push("/dashboard");
+        //   toast({
+        //     title: "Підтвердження успішне",
+        //     description: "Двофакторну автентифікацію пройдено.",
+        //   });
       } else {
         // Check if the server action indicated a redirect is needed (e.g., invalid session)
         if (result.redirect) {
